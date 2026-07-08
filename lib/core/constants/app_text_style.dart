@@ -11,7 +11,7 @@ class AppTextStyle {
     textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
   );
   static TextStyle get medium16 => GoogleFonts.roboto(
-    textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+    textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
   );
   static TextStyle get medium18 => GoogleFonts.roboto(
     textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
