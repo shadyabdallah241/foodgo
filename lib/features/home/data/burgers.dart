@@ -14,6 +14,7 @@ List<Burger> burgers = [
     spicyLevel: .mild,
     ingredients: [],
     category: .cheese,
+    price: 8.25,
   ),
   Burger(
     id: "1",
@@ -27,6 +28,7 @@ List<Burger> burgers = [
     spicyLevel: .mild,
     ingredients: [],
     category: .veggie,
+    price: 10.0,
   ),
   Burger(
     id: "2",
@@ -40,6 +42,7 @@ List<Burger> burgers = [
     spicyLevel: .mild,
     ingredients: [],
     category: .chicken,
+    price: 7.25,
   ),
   Burger(
     id: "3",
@@ -53,5 +56,6 @@ List<Burger> burgers = [
     spicyLevel: .mild,
     ingredients: [],
     category: .fried,
+    price: 11,
   ),
 ];

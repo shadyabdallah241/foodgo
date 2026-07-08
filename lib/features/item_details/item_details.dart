@@ -1,24 +1,41 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
+import 'package:foodgo/core/widgets/portion_widget.dart';
+import 'package:foodgo/core/widgets/slider_widget.dart';
+import 'package:foodgo/features/customize/customize_page.dart';
 import 'package:foodgo/features/home/models/burger.dart';
 
-class ItemDetails extends StatefulWidget {
+class ItemDetails extends ConsumerStatefulWidget {
   const ItemDetails({super.key, required this.burger});
   final Burger burger;
   @override
-  State<ItemDetails> createState() => _ItemDetailsState();
+  ConsumerState<ItemDetails> createState() => _ItemDetailsState();
 }
 
-class _ItemDetailsState extends State<ItemDetails> {
-  double _currentDisreteSlider = 60.2;
+class _ItemDetailsState extends ConsumerState<ItemDetails> {
   late PortionSize _currentPortion;
+  late double _basePrice;
+
   @override
   void initState() {
     super.initState();
     _currentPortion = widget.burger.portion;
+    _basePrice = widget.burger.price;
+  }
+
+  double getPrice() {
+    switch (_currentPortion) {
+      case PortionSize.small:
+        return _basePrice;
+      case PortionSize.medium:
+        return _basePrice + 2;
+      case PortionSize.large:
+        return _basePrice + 3;
+    }
   }
 
   @override
@@ -31,9 +48,39 @@ class _ItemDetailsState extends State<ItemDetails> {
         ),
         actions: [
           InkWell(
+            onTap: () async {
+              final PortionSize? newPortion = await Navigator.push<PortionSize>(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CustomizePage(
+                    currentPortion: _currentPortion,
+                    burger: widget.burger,
+                  ),
+                ),
+              );
+
+              if (newPortion != null) {
+                setState(() {
+                  _currentPortion = newPortion;
+                });
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.only(right: 20),
-              child: Image.asset(AppIcons.search),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: AppColors.mainText,
+                ),
+                child: Text(
+                  "Customize",
+                  style: AppTextStyle.semiBold18.copyWith(
+                    fontSize: 12,
+                    color: AppColors.onPrimary,
+                  ),
+                ),
+              ),
             ),
           ),
         ],
@@ -63,106 +110,16 @@ class _ItemDetailsState extends State<ItemDetails> {
 
             Row(
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      spacing: 10,
-                      children: [
-                        Text("Spicy", style: AppTextStyle.medium14),
-                        Slider(
-                          padding: EdgeInsets.all(0),
-                          value: _currentDisreteSlider,
-                          max: 100,
-                          divisions: 3,
-                          activeColor: AppColors.primary,
-                          onChanged: (value) {
-                            setState(() {
-                              _currentDisreteSlider = value;
-                            });
-                          },
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Mild",
-                              style: AppTextStyle.medium14.copyWith(
-                                color: AppColors.green,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              "Hot",
-                              style: AppTextStyle.medium14.copyWith(
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                Expanded(child: MySlider()),
                 SizedBox(width: 15),
                 Expanded(
-                  child: Column(
-                    spacing: 15,
-                    crossAxisAlignment: .start,
-                    children: [
-                      Text("Portion", style: AppTextStyle.medium14),
-                      Row(
-                        mainAxisSize: .min,
-                        spacing: 15,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  _currentPortion =
-                                      PortionSize
-                                          .values[(_currentPortion.index + 1) %
-                                          PortionSize.values.length];
-                                });
-                              },
-                              child: Center(child: Icon(Icons.arrow_left)),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 55,
-                            child: Text(
-                              _currentPortion.name,
-                              style: AppTextStyle.medium14,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                _currentPortion =
-                                    PortionSize.values[(_currentPortion.index -
-                                            1) %
-                                        PortionSize.values.length];
-                              });
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(child: Icon(Icons.arrow_right)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: PortionWidget(
+                    currentPortion: _currentPortion,
+                    onChanged: (PortionSize newSize) {
+                      setState(() {
+                        _currentPortion = newSize;
+                      });
+                    },
                   ),
                 ),
               ],
@@ -177,7 +134,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                     color: AppColors.primary,
                   ),
                   child: Text(
-                    "8.24",
+                    getPrice().toString(),
                     style: AppTextStyle.semiBold18.copyWith(
                       fontSize: 22,
                       color: AppColors.onPrimary,

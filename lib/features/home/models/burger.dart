@@ -40,6 +40,7 @@ class Burger {
   final double rating;
   final int duration;
   final String description;
+  final double price;
 
   final PortionSize portion;
   final SpicyLevel spicyLevel;
@@ -57,6 +58,6 @@ class Burger {
     required this.portion,
     required this.spicyLevel,
     required this.ingredients,
-    required this.category,
+    required this.category, required this.price,
   });
 }
