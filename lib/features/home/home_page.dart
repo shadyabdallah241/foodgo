@@ -7,6 +7,7 @@ import 'package:foodgo/core/constants/app_images.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
 import 'package:foodgo/features/home/models/burger.dart';
 import 'package:foodgo/features/home/provider/favorite_provider.dart';
+import 'package:foodgo/features/item_details/item_details.dart';
 
 import 'data/burgers.dart';
 
@@ -66,6 +67,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ],
               ),
               Text(
+
                 "Order your favourite food!",
                 style: AppTextStyle.medium18.copyWith(
                   color: AppColors.secondaryColor,
@@ -163,6 +165,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                   rate: burger.rating,
                   isFavorite: favorites.contains(burger.id),
                   onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return ItemDetails(burger: burger);
+                    },));
+                  },
+                  onFavoriteTap: () {
                     ref.read(favoriteProvider.notifier).toggleBurger(burger.id);
                   },
                 );
@@ -170,7 +177,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
           Stack(
-            alignment: .topCenter,
+
             children: [
               Container(
                 height: 75,
@@ -179,8 +186,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Row(
                     mainAxisAlignment: .spaceAround,
+
                     children: [
                       Column(
+
                         spacing: 10,
                         children: [
                           Image.asset(AppIcons.home),
@@ -255,6 +264,7 @@ class BurgerCard extends StatelessWidget {
   final double rate;
   final bool isFavorite;
   final VoidCallback? onTap;
+  final VoidCallback? onFavoriteTap;
   const BurgerCard({
     super.key,
     required this.image,
@@ -262,52 +272,55 @@ class BurgerCard extends StatelessWidget {
     required this.description,
     required this.rate,
     this.isFavorite = false,
-    this.onTap,
+    this.onFavoriteTap, this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.onPrimary,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            // ignore: deprecated_member_use
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 12,
-            offset: Offset(0, 6),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: .start,
-          mainAxisAlignment: .center,
-          children: [
-            Center(child: Image.asset(image)),
-            Text(name, style: AppTextStyle.semiBold16),
-            Text(description, style: AppTextStyle.regular16),
-            SizedBox(height: 10),
-            Row(
-              mainAxisSize: .min,
-              children: [
-                Icon(Icons.star, color: CupertinoColors.systemYellow),
-                Text(rate.toString(), style: AppTextStyle.medium16),
-                Spacer(),
-                GestureDetector(
-                  onTap: onTap,
-                  child: Image.asset(
-                    !isFavorite ? AppIcons.heartOutline : AppIcons.heart,
-                    color: isFavorite
-                        ? AppColors.primary
-                        : AppColors.secondaryColor,
-                  ),
-                ),
-              ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.onPrimary,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              // ignore: deprecated_member_use
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 12,
+              offset: Offset(0, 6),
             ),
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: .start,
+            mainAxisAlignment: .center,
+            children: [
+              Center(child: Image.asset(image)),
+              Text(name, style: AppTextStyle.semiBold16),
+              Text(description, style: AppTextStyle.regular16),
+              SizedBox(height: 10),
+              Row(
+                mainAxisSize: .min,
+                children: [
+                  Icon(Icons.star, color: CupertinoColors.systemYellow),
+                  Text(rate.toString(), style: AppTextStyle.medium16),
+                  Spacer(),
+                  GestureDetector(
+                    onTap: onFavoriteTap,
+                    child: Image.asset(
+                      !isFavorite ? AppIcons.heartOutline : AppIcons.heart,
+                      color: isFavorite
+                          ? AppColors.primary
+                          : AppColors.secondaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

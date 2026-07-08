@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'features/splash/splash_page.dart';
+import 'package:foodgo/features/splash/splash_page.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
