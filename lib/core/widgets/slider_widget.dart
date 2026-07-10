@@ -3,8 +3,7 @@ import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
 
 class MySlider extends StatefulWidget {
-  const MySlider({super.key});
-
+   const MySlider({super.key});
   @override
   State<MySlider> createState() => _MySliderState();
 }
@@ -30,7 +29,11 @@ class _MySliderState extends State<MySlider> {
             onChanged: (value) {
               setState(() {
                 _currentDisreteSlider = value;
+               
               });
+
+
+
             },
           ),
           Row(

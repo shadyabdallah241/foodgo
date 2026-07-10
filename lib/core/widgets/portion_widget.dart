@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
-import 'package:foodgo/features/home/models/burger.dart';
+
+import '../models/burger.dart';
 
 class PortionWidget extends StatelessWidget {
   const PortionWidget({

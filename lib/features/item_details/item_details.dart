@@ -7,11 +7,13 @@ import 'package:foodgo/core/constants/app_text_style.dart';
 import 'package:foodgo/core/widgets/portion_widget.dart';
 import 'package:foodgo/core/widgets/slider_widget.dart';
 import 'package:foodgo/features/customize/customize_page.dart';
-import 'package:foodgo/features/home/models/burger.dart';
+
+import '../../core/models/burger.dart';
 
 class ItemDetails extends ConsumerStatefulWidget {
   const ItemDetails({super.key, required this.burger});
   final Burger burger;
+
   @override
   ConsumerState<ItemDetails> createState() => _ItemDetailsState();
 }
@@ -19,12 +21,16 @@ class ItemDetails extends ConsumerStatefulWidget {
 class _ItemDetailsState extends ConsumerState<ItemDetails> {
   late PortionSize _currentPortion;
   late double _basePrice;
-
+  late double newValue;
+  late SpicyLevel _spicyLevel ;
   @override
   void initState() {
     super.initState();
     _currentPortion = widget.burger.portion;
     _basePrice = widget.burger.price;
+   if(_spicyLevel==SpicyLevel.mild){
+     newValue=0;
+   }
   }
 
   double getPrice() {
@@ -55,6 +61,7 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
                   builder: (context) => CustomizePage(
                     currentPortion: _currentPortion,
                     burger: widget.burger,
+                    sliderValue: 0,
                   ),
                 ),
               );

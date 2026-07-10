@@ -1,4 +1,5 @@
-import 'package:foodgo/features/home/models/burger.dart';
+
+import 'burger.dart';
 
 
 class OrderState {

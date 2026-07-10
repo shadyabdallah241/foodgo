@@ -1,5 +1,6 @@
 import 'package:foodgo/core/constants/app_images.dart';
-import 'package:foodgo/features/home/models/burger.dart';
+
+import '../../../core/models/burger.dart';
 
 List<Burger> burgers = [
   Burger(

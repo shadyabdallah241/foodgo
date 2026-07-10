@@ -5,10 +5,10 @@ import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_images.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
-import 'package:foodgo/features/home/models/burger.dart';
 import 'package:foodgo/features/home/provider/favorite_provider.dart';
 import 'package:foodgo/features/item_details/item_details.dart';
 
+import '../../core/models/burger.dart';
 import 'data/burgers.dart';
 
 class HomePage extends ConsumerStatefulWidget {

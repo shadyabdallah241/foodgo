@@ -3,26 +3,29 @@ import 'package:foodgo/core/constants/app_images.dart';
 import 'package:foodgo/core/widgets/portion_widget.dart';
 import 'package:foodgo/core/widgets/slider_widget.dart';
 
-import '../home/models/burger.dart';
+import '../../core/models/burger.dart';
 
 class CustomizePage extends StatefulWidget {
   const CustomizePage({
     super.key,
     required this.currentPortion,
-    required this.burger,
+    required this.burger, required this.sliderValue,
   });
   final Burger burger;
   final PortionSize currentPortion;
+  final double sliderValue;
   @override
   State<CustomizePage> createState() => _CustomizePageState();
 }
 
 class _CustomizePageState extends State<CustomizePage> {
   late PortionSize currentPortion;
+  late double newValue;
   @override
   void initState() {
     super.initState();
     currentPortion = widget.currentPortion;
+    newValue=widget.sliderValue;
   }
   @override
   Widget build(BuildContext context) {

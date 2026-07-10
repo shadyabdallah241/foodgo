@@ -7,8 +7,8 @@ class FavoriteNotifier extends Notifier<List<String>> {
   }
 
   void toggleBurger(String id) {
-    final idIsfavorite = state.contains(id);
-    if (!idIsfavorite) {
+    final isFavorite = state.contains(id);
+    if (!isFavorite) {
       state = [...state, id];
     } else {
       state=state.where((e) => e != id).toList();
