@@ -127,6 +127,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           SizedBox(
             height: 70,
             child: ListView.separated(
+              clipBehavior: .none,
               separatorBuilder: (context, index) {
                 return SizedBox(width: 12);
               },
@@ -147,8 +148,10 @@ class _HomePageState extends ConsumerState<HomePage> {
               },
             ),
           ),
+          SizedBox(height: 30),
           Expanded(
             child: GridView.builder(
+
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
@@ -251,6 +254,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
             ],
           ),
+
         ],
       ),
     );

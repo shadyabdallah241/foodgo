@@ -21,16 +21,14 @@ class ItemDetails extends ConsumerStatefulWidget {
 class _ItemDetailsState extends ConsumerState<ItemDetails> {
   late PortionSize _currentPortion;
   late double _basePrice;
-  late double newValue;
-  late SpicyLevel _spicyLevel ;
+  final double sliderValue=0;
+
   @override
   void initState() {
     super.initState();
     _currentPortion = widget.burger.portion;
     _basePrice = widget.burger.price;
-   if(_spicyLevel==SpicyLevel.mild){
-     newValue=0;
-   }
+
   }
 
   double getPrice() {
@@ -61,7 +59,6 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
                   builder: (context) => CustomizePage(
                     currentPortion: _currentPortion,
                     burger: widget.burger,
-                    sliderValue: 0,
                   ),
                 ),
               );
@@ -117,7 +114,7 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
 
             Row(
               children: [
-                Expanded(child: MySlider()),
+                Expanded(child: MySlider(sliderValue: sliderValue,)),
                 SizedBox(width: 15),
                 Expanded(
                   child: PortionWidget(
