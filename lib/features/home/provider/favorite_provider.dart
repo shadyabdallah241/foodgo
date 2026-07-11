@@ -1,21 +1,26 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class FavoriteNotifier extends Notifier<List<String>> {
+part 'favorite_provider.g.dart';
+@riverpod
+class Favorite  extends _$Favorite  {
   @override
-  List<String> build() {
-    return [];
+  Set<int> build() {
+    return {};
   }
 
-  void toggleBurger(String id) {
-    final isFavorite = state.contains(id);
-    if (!isFavorite) {
-      state = [...state, id];
+  void toggleBurger(int burgerId) {
+    if (state.contains(burgerId)) {
+      state = {...state}..remove(burgerId);
     } else {
-      state=state.where((e) => e != id).toList();
+      state = {...state, burgerId};
     }
   }
 }
 
-final favoriteProvider = NotifierProvider<FavoriteNotifier, List<String>>(() {
-  return FavoriteNotifier();
-});
+
+
+
+
+
+
+
