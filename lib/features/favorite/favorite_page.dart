@@ -21,100 +21,104 @@ class _FavoritePageState extends ConsumerState<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
-    final favoriteBurgers = ref.watch(favoriteProvider);
-    final favoriteList = burgers.where(
-          (burger) => favoriteBurgers.contains(int.parse(burger.id)),
-    ).toList();
+
+    final favoriteBurgers = ref.watch(favoriteProvider.notifier).favoriteBurgers(burgers);
+    ref.watch(favoriteProvider);
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Favorite Order"),
         backgroundColor: AppColors.onPrimary,
       ),
       backgroundColor: AppColors.onPrimary,
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withAlpha(30),
-                        blurRadius: 20,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: .none,
-                      ),
-                      hintText: "Search",
-                      hintStyle: AppTextStyle.medium18.copyWith(
-                        color: AppColors.mainText,
-                      ),
-                      filled: true,
-                      fillColor: AppColors.onPrimary,
-                      prefixIcon: Image.asset(
-                        AppIcons.search,
-                        color: AppColors.mainText,
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(30),
+                          blurRadius: 20,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: .none,
+                        ),
+                        hintText: "Search",
+                        hintStyle: AppTextStyle.medium18.copyWith(
+                          color: AppColors.mainText,
+                        ),
+                        filled: true,
+                        fillColor: AppColors.onPrimary,
+                        prefixIcon: Image.asset(
+                          AppIcons.search,
+                          color: AppColors.mainText,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  width: 60,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(20),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    width: 60,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Image.asset(AppIcons.settingsSliders),
                   ),
-                  child: Image.asset(AppIcons.settingsSliders),
                 ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 0.65,
-              ),
-              itemCount: favoriteList.length,
-              itemBuilder: (context, index) {
-                final burger = favoriteList[index];
-                return BurgerCard(
-                  image: burger.image,
-                  name: burger.name,
-                  description: burger.shortDescription,
-                  rate: burger.rating,
-                  isFavorite: true,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return ItemDetails(burger: burger);
-                        },
-                      ),
-                    );
-                  },
-                  onFavoriteTap: () {
-                    ref.read(favoriteProvider.notifier).toggleBurger(int.parse(burger.id));
-                  },
-                );
-              },
+              ],
             ),
-          ),
-        ],
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.65,
+                ),
+                itemCount: favoriteBurgers.length,
+                itemBuilder: (context, index) {
+                  final burger = favoriteBurgers[index];
+                  return BurgerCard(
+                    image: burger.image,
+                    name: burger.name,
+                    description: burger.shortDescription,
+                    rate: burger.rating,
+                    isFavorite: true,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ItemDetails(burger: burger);
+                          },
+                        ),
+                      );
+                    },
+                    onFavoriteTap: () {
+                      ref.read(favoriteProvider.notifier).toggleBurger(int.parse(burger.id));
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
