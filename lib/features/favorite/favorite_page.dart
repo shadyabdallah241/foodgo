@@ -9,8 +9,6 @@ import 'package:foodgo/features/item_details/item_details.dart';
 
 import '../home/data/burgers.dart';
 
-
-
 class FavoritePage extends ConsumerStatefulWidget {
   const FavoritePage({super.key});
 
@@ -21,11 +19,17 @@ class FavoritePage extends ConsumerStatefulWidget {
 class _FavoritePageState extends ConsumerState<FavoritePage> {
   int currentSelected = 0;
 
-
   @override
   Widget build(BuildContext context) {
-    final favoriteBurgers = ref.watch(favoriteProvider);    return Scaffold(
-appBar: AppBar(title: Text("Favorite Order"),backgroundColor: AppColors.onPrimary,),
+    final favoriteBurgers = ref.watch(favoriteProvider);
+    final favoriteList = burgers.where(
+          (burger) => favoriteBurgers.contains(int.parse(burger.id)),
+    ).toList();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Favorite Order"),
+        backgroundColor: AppColors.onPrimary,
+      ),
       backgroundColor: AppColors.onPrimary,
       body: Column(
         children: [
@@ -84,28 +88,32 @@ appBar: AppBar(title: Text("Favorite Order"),backgroundColor: AppColors.onPrimar
                 mainAxisSpacing: 16,
                 childAspectRatio: 0.65,
               ),
-              itemCount: favoriteBurgers.length,
+              itemCount: favoriteList.length,
               itemBuilder: (context, index) {
-                final burger = burgers[index];              return BurgerCard(
+                final burger = favoriteList[index];
+                return BurgerCard(
                   image: burger.image,
                   name: burger.name,
                   description: burger.shortDescription,
                   rate: burger.rating,
                   isFavorite: true,
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return ItemDetails(burger: burger);
-                    },));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ItemDetails(burger: burger);
+                        },
+                      ),
+                    );
                   },
                   onFavoriteTap: () {
-                    ref.read(favoriteProvider.notifier).toggleBurger(index);
+                    ref.read(favoriteProvider.notifier).toggleBurger(int.parse(burger.id));
                   },
                 );
               },
             ),
           ),
-
-
         ],
       ),
     );
@@ -127,7 +135,8 @@ class BurgerCard extends StatelessWidget {
     required this.description,
     required this.rate,
     this.isFavorite = false,
-    this.onFavoriteTap, this.onTap,
+    this.onFavoriteTap,
+    this.onTap,
   });
 
   @override

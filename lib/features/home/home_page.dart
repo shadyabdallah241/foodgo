@@ -6,9 +6,9 @@ import 'package:foodgo/core/constants/app_images.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
 import 'package:foodgo/features/favorite/favorite_page.dart';
 import 'package:foodgo/features/home/provider/favorite_provider.dart';
+import 'package:foodgo/features/home/provider/search_provider.dart';
 import 'package:foodgo/features/item_details/item_details.dart';
 
-import 'data/burgers.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -30,6 +30,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final favoriteIds = ref.watch(favoriteProvider);
+    final filteredBurgers = ref.watch(searchProvider);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
@@ -86,6 +87,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                       ],
                     ),
                     child: TextFormField(
+                      onChanged: (value) {
+                        ref.read(searchProvider.notifier).search(value);
+                        print(value);
+                      },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -148,9 +153,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                 mainAxisSpacing: 16,
                 childAspectRatio: 0.7,
               ),
-              itemCount: burgers.length,
+              itemCount: filteredBurgers.length,
               itemBuilder: (context, index) {
-                final burger = burgers[index];
+                final burger = filteredBurgers[index];
                 return BurgerCard(
                   image: burger.image,
                   name: burger.name,
