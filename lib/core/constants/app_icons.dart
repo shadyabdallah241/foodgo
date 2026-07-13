@@ -12,7 +12,7 @@ class AppIcons {
   static const String search = "${basePath}search.png";
   static const String send = "${basePath}send.png";
   static const String user = "${basePath}user.png";
-  static const String visa = "${basePath}salad.png";
+  static const String visa = "${basePath}visa.png";
   static const String settingsSliders = "${basePath}settings-sliders.png";
   static const String home = "${basePath}home.png";
   static const String checked = "${basePath}checked.png";

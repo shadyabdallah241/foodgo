@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foodgo/features/splash/splash_page.dart';
+
+import 'features/payment/payment_page.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Foodgo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const SplashPage(),
+      home: const PaymentPage(),
     );
   }
 }

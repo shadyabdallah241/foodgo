@@ -54,12 +54,15 @@ class _HomePageState extends ConsumerState<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
-                  children: [
-                    Image.asset(AppIcons.foodgoBlack),
-                    const Spacer(),
-                    Image.asset(AppImages.person),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: Row(
+                    children: [
+                      Image.asset(AppIcons.foodgoBlack),
+                      const Spacer(),
+                      Image.asset(AppImages.person),
+                    ],
+                  ),
                 ),
                 Text(
                   "Order your favourite food!",
@@ -89,7 +92,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                     child: TextFormField(
                       onChanged: (value) {
                         ref.read(searchProvider.notifier).search(value);
-                        print(value);
                       },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
