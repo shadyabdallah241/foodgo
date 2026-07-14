@@ -16,4 +16,5 @@ class AppIcons {
   static const String settingsSliders = "${basePath}settings-sliders.png";
   static const String home = "${basePath}home.png";
   static const String checked = "${basePath}checked.png";
+  static const String menu = "${basePath}menu.png";
 }

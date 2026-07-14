@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'features/profile/profile_page.dart';
+import 'features/home/home_page.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -15,8 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Foodgo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const ProfilePage(),
+      theme: ThemeData(
+        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: const HomePage(),
     );
   }
 }

@@ -63,7 +63,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(
-                          top: 40,
+                          top: 80,
                           left: 16,
                           right: 16,
                           bottom: 30,
@@ -95,31 +95,41 @@ class ProfilePage extends StatelessWidget {
                                       labelText: "Password",
                                       isPassword: true,
                                     ),
-                                    SizedBox(height: 35),
-                                    Divider(),
-                                    SizedBox(height: 25),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Payment Details",
-                                          style: AppTextStyle.medium16,
-                                        ),
-                                        Spacer(),
-                                        Icon(Icons.chevron_right_sharp),
-                                      ],
+                                    SizedBox(height: 50),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 32,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Divider(),
+                                          SizedBox(height: 25),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Payment Details",
+                                                style: AppTextStyle.medium16,
+                                              ),
+                                              Spacer(),
+                                              Icon(Icons.chevron_right_sharp),
+                                            ],
+                                          ),
+                                          SizedBox(height: 15),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Order history",
+                                                style: AppTextStyle.medium16,
+                                              ),
+                                              Spacer(),
+                                              Icon(Icons.chevron_right_sharp),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    SizedBox(height: 15),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Order history",
-                                          style: AppTextStyle.medium16,
-                                        ),
-                                        Spacer(),
-                                        Icon(Icons.chevron_right_sharp),
-                                      ],
-                                    ),
-                                    SizedBox(height: 30),
+
+                                    SizedBox(height: 50),
                                     Row(
                                       mainAxisAlignment: .center,
                                       children: [
@@ -210,8 +220,8 @@ class ProfilePage extends StatelessWidget {
                     Positioned(
                       top: 60,
                       child: Container(
-                        width: 120,
-                        height: 120,
+                        width: 140,
+                        height: 140,
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -247,9 +257,14 @@ class ProfilePage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: .spaceBetween,
                             children: [
-                              Icon(
-                                Icons.arrow_back_ios_new_sharp,
-                                color: AppColors.onPrimary,
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(
+                                  Icons.arrow_back_ios_new_sharp,
+                                  color: AppColors.onPrimary,
+                                ),
                               ),
                               Icon(Icons.settings, color: AppColors.onPrimary),
                             ],

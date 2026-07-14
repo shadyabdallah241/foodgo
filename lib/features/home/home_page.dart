@@ -9,6 +9,8 @@ import 'package:foodgo/features/home/provider/favorite_provider.dart';
 import 'package:foodgo/features/home/provider/search_provider.dart';
 import 'package:foodgo/features/item_details/item_details.dart';
 
+import '../customer_support/customer_support.dart';
+import '../profile/profile_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -27,6 +29,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     "Fried",
     "Chicken",
   ];
+
   @override
   Widget build(BuildContext context) {
     final favoriteIds = ref.watch(favoriteProvider);
@@ -185,15 +188,54 @@ class _HomePageState extends ConsumerState<HomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavBarItem(AppIcons.home, true),
-                _buildNavBarItem(AppIcons.user, false),
-                _buildNavBarItem(AppIcons.comment, false),
+                _buildNavBarItem(
+                  icon: AppIcons.home,
+                  isActive: true,
+                  onTap: () {},
+                ),
+                _buildNavBarItem(
+                  icon: AppIcons.user,
+                  isActive: false,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ),
+                    );
+                  },
+                ),
+                _buildNavBarItem(
+                  icon: AppIcons.comment,
+                  isActive: false,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CustomerSupport(),
+                      ),
+                    );
+                  },
+                ),
                 GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const FavoritePage()),
+                    MaterialPageRoute(
+                      builder: (context) => const FavoritePage(),
+                    ),
                   ),
-                  child: _buildNavBarItem(AppIcons.heart, false),
+                  child: _buildNavBarItem(
+                    icon: AppIcons.heart,
+                    isActive: false,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FavoritePage(),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -203,11 +245,18 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 
-  Widget _buildNavBarItem(String icon, bool isActive) {
+  Widget _buildNavBarItem({
+    required String icon,
+    required bool isActive,
+    required VoidCallback onTap,
+  }) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(icon, color: Colors.white),
+        GestureDetector(
+          onTap: onTap,
+          child: Image.asset(icon, color: Colors.white),
+        ),
         if (isActive) ...[
           const SizedBox(height: 4),
           Container(
@@ -232,7 +281,7 @@ class BurgerCard extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteTap;
-  
+
   const BurgerCard({
     super.key,
     required this.image,
@@ -267,14 +316,26 @@ class BurgerCard extends StatelessWidget {
           children: [
             Expanded(child: Center(child: Image.asset(image))),
             const SizedBox(height: 8),
-            Text(name, style: AppTextStyle.semiBold16, maxLines: 1, overflow: TextOverflow.ellipsis),
-            Text(description, style: AppTextStyle.regular16.copyWith(fontSize: 12), maxLines: 1),
+            Text(
+              name,
+              style: AppTextStyle.semiBold16,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              description,
+              style: AppTextStyle.regular16.copyWith(fontSize: 12),
+              maxLines: 1,
+            ),
             const SizedBox(height: 8),
             Row(
               children: [
                 const Icon(Icons.star, color: Colors.amber, size: 16),
                 const SizedBox(width: 4),
-                Text(rate.toString(), style: AppTextStyle.medium16.copyWith(fontSize: 14)),
+                Text(
+                  rate.toString(),
+                  style: AppTextStyle.medium16.copyWith(fontSize: 14),
+                ),
                 const Spacer(),
                 GestureDetector(
                   onTap: onFavoriteTap,
@@ -300,6 +361,7 @@ class CategoryButton extends StatelessWidget {
     required this.text,
     this.isSelected = false,
   });
+
   final VoidCallback? onTap;
   final String text;
   final bool isSelected;
