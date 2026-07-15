@@ -137,6 +137,7 @@ class _CustomizePageState extends ConsumerState<CustomizePage> {
                 },
               ),
             ),
+            SizedBox(height: 35),
             Row(
               mainAxisAlignment: .spaceBetween,
               children: [

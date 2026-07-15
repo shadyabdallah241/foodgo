@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foodgo/features/splash/splash_page.dart';
 
-import 'features/home/home_page.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }
