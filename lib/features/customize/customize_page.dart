@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
@@ -17,6 +16,7 @@ class CustomizePage extends ConsumerStatefulWidget {
     required this.currentPortion,
     required this.burger,
   });
+
   final Burger burger;
   final PortionSize currentPortion;
 
@@ -27,6 +27,7 @@ class CustomizePage extends ConsumerStatefulWidget {
 class _CustomizePageState extends ConsumerState<CustomizePage> {
   late PortionSize currentPortion;
   final double sliderValue = 0;
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +39,6 @@ class _CustomizePageState extends ConsumerState<CustomizePage> {
     final extras = ref.watch(extrasProvider);
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: InkWell(
@@ -50,7 +50,7 @@ class _CustomizePageState extends ConsumerState<CustomizePage> {
         actions: [Icon(Icons.search)],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: .start,
           children: [
@@ -120,13 +120,11 @@ class _CustomizePageState extends ConsumerState<CustomizePage> {
                 separatorBuilder: (context, index) {
                   return SizedBox(width: 15);
                 },
-
                 itemCount: sideOptions.length,
                 scrollDirection: .horizontal,
                 itemBuilder: (context, index) {
                   final sideOption = sideOptions[index];
                   final isAdded = extras.any((e) => e.id == sideOption.id);
-
                   return MyCustomize(
                     id: index.toString(),
                     name: sideOption.name,
@@ -139,8 +137,6 @@ class _CustomizePageState extends ConsumerState<CustomizePage> {
                 },
               ),
             ),
-
-            SizedBox(height: 40),
             Row(
               mainAxisAlignment: .spaceBetween,
               children: [
@@ -161,7 +157,6 @@ class _CustomizePageState extends ConsumerState<CustomizePage> {
                     ),
                   ],
                 ),
-
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 54, vertical: 20),
                   decoration: BoxDecoration(
@@ -194,6 +189,7 @@ class MyCustomize extends StatelessWidget {
     this.isChecked = false,
     required this.onTap,
   });
+
   final String id;
   final String name;
   final String image;

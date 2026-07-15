@@ -10,6 +10,7 @@ class PortionWidget extends StatelessWidget {
     required this.currentPortion,
     required this.onChanged,
   });
+
   final PortionSize currentPortion;
   final ValueChanged<PortionSize> onChanged;
 
@@ -22,7 +23,7 @@ class PortionWidget extends StatelessWidget {
         Text("Portion", style: AppTextStyle.medium14),
         Row(
           mainAxisSize: .min,
-          spacing: 15,
+          mainAxisAlignment: .spaceBetween,
           children: [
             Container(
               height: 40,

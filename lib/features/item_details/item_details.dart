@@ -7,11 +7,13 @@ import 'package:foodgo/core/constants/app_text_style.dart';
 import 'package:foodgo/core/widgets/portion_widget.dart';
 import 'package:foodgo/core/widgets/slider_widget.dart';
 import 'package:foodgo/features/customize/customize_page.dart';
+import 'package:foodgo/features/payment/payment_page.dart';
 
 import '../../core/models/burger.dart';
 
 class ItemDetails extends ConsumerStatefulWidget {
   const ItemDetails({super.key, required this.burger});
+
   final Burger burger;
 
   @override
@@ -21,14 +23,13 @@ class ItemDetails extends ConsumerStatefulWidget {
 class _ItemDetailsState extends ConsumerState<ItemDetails> {
   late PortionSize _currentPortion;
   late double _basePrice;
-  final double sliderValue=0;
+  final double sliderValue = 0;
 
   @override
   void initState() {
     super.initState();
     _currentPortion = widget.burger.portion;
     _basePrice = widget.burger.price;
-
   }
 
   double getPrice() {
@@ -46,6 +47,7 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         leading: InkWell(
           onTap: () => Navigator.pop(context),
           child: Image.asset(AppIcons.arrowLeft),
@@ -114,7 +116,7 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
 
             Row(
               children: [
-                Expanded(child: MySlider(sliderValue: sliderValue,)),
+                Expanded(child: MySlider(sliderValue: sliderValue)),
                 SizedBox(width: 15),
                 Expanded(
                   child: PortionWidget(
@@ -132,6 +134,7 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
               mainAxisAlignment: .spaceBetween,
               children: [
                 Container(
+                  width: 110,
                   padding: EdgeInsets.symmetric(horizontal: 23, vertical: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -145,17 +148,29 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 54, vertical: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: AppColors.mainText,
-                  ),
-                  child: Text(
-                    "ORDER NOW",
-                    style: AppTextStyle.semiBold18.copyWith(
-                      fontSize: 18,
-                      color: AppColors.onPrimary,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return PaymentPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 54, vertical: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AppColors.mainText,
+                    ),
+                    child: Text(
+                      "ORDER NOW",
+                      style: AppTextStyle.semiBold18.copyWith(
+                        fontSize: 18,
+                        color: AppColors.onPrimary,
+                      ),
                     ),
                   ),
                 ),
