@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_images.dart';
+import 'package:foodgo/core/constants/app_text_style.dart';
 
-import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_text_style.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -48,6 +48,7 @@ class ProfilePage extends StatelessWidget {
           SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
+
               children: [
                 Stack(
                   clipBehavior: .none,
@@ -160,10 +161,10 @@ class ProfilePage extends StatelessWidget {
                                                 "Edit Profile",
                                                 style: AppTextStyle.semiBold18
                                                     .copyWith(
-                                                      fontSize: 18,
-                                                      color:
-                                                          AppColors.onPrimary,
-                                                    ),
+                                                  fontSize: 18,
+                                                  color:
+                                                  AppColors.onPrimary,
+                                                ),
                                               ),
 
                                               Icon(
@@ -195,9 +196,9 @@ class ProfilePage extends StatelessWidget {
                                                 "Log out",
                                                 style: AppTextStyle.semiBold18
                                                     .copyWith(
-                                                      fontSize: 18,
-                                                      color: AppColors.primary,
-                                                    ),
+                                                  fontSize: 18,
+                                                  color: AppColors.primary,
+                                                ),
                                               ),
 
                                               Icon(

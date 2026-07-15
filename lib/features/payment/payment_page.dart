@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
+import 'package:foodgo/features/popup/popup_message_page.dart';
 
-import '../popup/popup_message_page.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -14,6 +14,7 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,12 +156,13 @@ class _PaymentPageState extends State<PaymentPage> {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PopupMessagePage(),
-                    ),
-                  ),
+                  onTap: () =>
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PopupMessagePage(),
+                        ),
+                      ),
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 54, vertical: 20),
                     decoration: BoxDecoration(
@@ -196,6 +198,7 @@ class PaymentWidget extends StatelessWidget {
     required this.isSelected,
     this.onTap,
   });
+
   final int id;
   final String icon;
   final String cardNumber;
@@ -260,13 +263,13 @@ class PaymentWidget extends StatelessWidget {
                   ),
                   isSelected
                       ? Container(
-                          width: 15,
-                          height: 15,
-                          decoration: BoxDecoration(
-                            shape: .circle,
-                            color: Colors.white,
-                          ),
-                        )
+                    width: 15,
+                    height: 15,
+                    decoration: BoxDecoration(
+                      shape: .circle,
+                      color: Colors.white,
+                    ),
+                  )
                       : Container(),
                 ],
               ),

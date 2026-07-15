@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
+import 'package:foodgo/core/models/burger.dart';
 
-import '../models/burger.dart';
 
 class PortionWidget extends StatelessWidget {
   const PortionWidget({
@@ -35,8 +35,8 @@ class PortionWidget extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   final newPortion =
-                      PortionSize.values[(currentPortion.index + 1) %
-                          PortionSize.values.length];
+                  PortionSize.values[(currentPortion.index + 1) %
+                      PortionSize.values.length];
                   onChanged(newPortion);
                 },
                 child: Center(child: Icon(Icons.arrow_left)),
@@ -52,8 +52,8 @@ class PortionWidget extends StatelessWidget {
             InkWell(
               onTap: () {
                 final newPortion =
-                    PortionSize.values[(currentPortion.index - 1) %
-                        PortionSize.values.length];
+                PortionSize.values[(currentPortion.index - 1) %
+                    PortionSize.values.length];
                 onChanged(newPortion);
               },
               child: Container(

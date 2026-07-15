@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
+import 'package:foodgo/features/home/data/burgers.dart';
 import 'package:foodgo/features/home/provider/favorite_provider.dart';
 import 'package:foodgo/features/item_details/item_details.dart';
 
-import '../home/data/burgers.dart';
 
 class FavoritePage extends ConsumerStatefulWidget {
   const FavoritePage({super.key});
@@ -21,8 +21,9 @@ class _FavoritePageState extends ConsumerState<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    final favoriteBurgers = ref.watch(favoriteProvider.notifier).favoriteBurgers(burgers);
+    final favoriteBurgers = ref
+        .watch(favoriteProvider.notifier)
+        .favoriteBurgers(burgers);
     ref.watch(favoriteProvider);
 
 
@@ -111,7 +112,8 @@ class _FavoritePageState extends ConsumerState<FavoritePage> {
                       );
                     },
                     onFavoriteTap: () {
-                      ref.read(favoriteProvider.notifier).toggleBurger(int.parse(burger.id));
+                      ref.read(favoriteProvider.notifier).toggleBurger(
+                          int.parse(burger.id));
                     },
                   );
                 },
@@ -132,6 +134,7 @@ class BurgerCard extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteTap;
+
   const BurgerCard({
     super.key,
     required this.image,
@@ -202,6 +205,7 @@ class CategoryButton extends StatelessWidget {
     required this.text,
     this.isSelected = false,
   });
+
   final void Function()? onTap;
   final String text;
   final bool isSelected;

@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
+import 'package:foodgo/core/models/burger.dart';
 import 'package:foodgo/core/widgets/portion_widget.dart';
 import 'package:foodgo/core/widgets/slider_widget.dart';
 import 'package:foodgo/features/customize/customize_page.dart';
 import 'package:foodgo/features/payment/payment_page.dart';
 
-import '../../core/models/burger.dart';
 
 class ItemDetails extends ConsumerStatefulWidget {
   const ItemDetails({super.key, required this.burger});
@@ -58,10 +58,11 @@ class _ItemDetailsState extends ConsumerState<ItemDetails> {
               final PortionSize? newPortion = await Navigator.push<PortionSize>(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CustomizePage(
-                    currentPortion: _currentPortion,
-                    burger: widget.burger,
-                  ),
+                  builder: (context) =>
+                      CustomizePage(
+                        currentPortion: _currentPortion,
+                        burger: widget.burger,
+                      ),
                 ),
               );
 

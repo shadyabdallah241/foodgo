@@ -4,11 +4,11 @@ import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_images.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
+import 'package:foodgo/core/models/burger.dart';
 import 'package:foodgo/core/widgets/portion_widget.dart';
 import 'package:foodgo/core/widgets/slider_widget.dart';
 import 'package:foodgo/features/customize/model/extra.dart';
 import 'package:foodgo/features/customize/provider/extras_provider.dart';
-import '../../core/models/burger.dart';
 
 class CustomizePage extends ConsumerStatefulWidget {
   const CustomizePage({

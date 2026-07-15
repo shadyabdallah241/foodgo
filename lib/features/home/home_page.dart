@@ -4,13 +4,13 @@ import 'package:foodgo/core/constants/app_colors.dart';
 import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_images.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
+import 'package:foodgo/features/customer_support/customer_support.dart';
 import 'package:foodgo/features/favorite/favorite_page.dart';
 import 'package:foodgo/features/home/provider/favorite_provider.dart';
 import 'package:foodgo/features/home/provider/search_provider.dart';
 import 'package:foodgo/features/item_details/item_details.dart';
+import 'package:foodgo/features/profile/profile_page.dart';
 
-import '../customer_support/customer_support.dart';
-import '../profile/profile_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -218,12 +218,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                   },
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FavoritePage(),
-                    ),
-                  ),
+                  onTap: () =>
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FavoritePage(),
+                        ),
+                      ),
                   child: _buildNavBarItem(
                     icon: AppIcons.heart,
                     isActive: false,

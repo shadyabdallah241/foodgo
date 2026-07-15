@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
+import 'package:foodgo/core/constants/app_text_style.dart';
 
-import '../../core/constants/app_text_style.dart';
 
 class PopupMessagePage extends StatelessWidget {
   const PopupMessagePage({super.key});

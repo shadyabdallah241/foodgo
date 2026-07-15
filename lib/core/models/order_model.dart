@@ -1,6 +1,4 @@
-
-import 'burger.dart';
-
+import 'package:foodgo/core/models/burger.dart';
 
 class OrderState {
   final Burger burger;

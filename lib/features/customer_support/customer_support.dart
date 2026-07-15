@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodgo/core/constants/app_colors.dart';
+import 'package:foodgo/core/constants/app_icons.dart';
 import 'package:foodgo/core/constants/app_images.dart';
 import 'package:foodgo/core/constants/app_text_style.dart';
 
-import '../../core/constants/app_icons.dart';
 
 class CustomerSupport extends StatelessWidget {
   const CustomerSupport({super.key});
@@ -44,7 +44,7 @@ class CustomerSupport extends StatelessWidget {
                         children: [
                           CustomerWidget(
                             message:
-                                "Hello, I ordered two fried \n chicken burgers. can I\n know how much time it\n will get to arrive?",
+                            "Hello, I ordered two fried \n chicken burgers. can I\n know how much time it\n will get to arrive?",
                           ),
                         ],
                       ),
@@ -59,7 +59,7 @@ class CustomerSupport extends StatelessWidget {
                       SizedBox(height: 15),
                       AgentWidget(
                         message:
-                            "It’ll get 25 minutes to \n arrive to your address",
+                        "It’ll get 25 minutes to \n arrive to your address",
                       ),
                       SizedBox(height: 12),
                       Text(
